@@ -1,5 +1,5 @@
 import React, {Component, Fragment }from "react";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+// import { HashRouter as Router, Route, Link } from "react-router-dom";
 import Header from "./Header";
 
 
@@ -10,11 +10,9 @@ class App extends Component {
     }
     render() {
         return (
-            <Fragment>
-                <Router>
-                    <Route><Header /></Route>
-                </Router>
-            </Fragment>
+            <div>
+                <Header />
+            </div>
         );
     }
 }
