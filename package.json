@@ -1,12 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a basic fullstack crud app to cement my knoledge at eda",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server & webpack --watch",
+    "start": "node server",
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -24,16 +24,11 @@
   },
   "homepage": "https://github.com/Oussama-Fajraoui/Movie-World",
   "dependencies": {
-    "axios": "^0.21.4",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongodb": "^4.7.0",
-    "mongoose": "^5.12.14",
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "express": "^4.16.4",
     "jest": "^24.8.0",
     "knex": "^0.16.5",
     "nodemon": "^1.19.0",
