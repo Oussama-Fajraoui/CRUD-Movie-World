@@ -2,11 +2,17 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const fetch = require("isomorphic-fetch");
+const movie = require('./database/movie');
 
 app.use(express.json());
 app.use(cors());
 
 let port = 5000;
+
+app.post('/api',(req,res)=> {
+    movie.saveRecipe(req.body);
+    res.send('Test');
+})
 
 app.get("/api",(req,res)=>{
     let url ="https://api.themoviedb.org/3/search/company?api_key=<<api_key>>&page=1";
