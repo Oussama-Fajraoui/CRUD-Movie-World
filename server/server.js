@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const movieSrc = require("../server/src") 
+const movieSrc = require("../server/src/movie.js") 
 
 app.use(express.json());
 
