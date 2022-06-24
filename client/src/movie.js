@@ -1,5 +1,5 @@
-const info = [];
-const test =(state = info, action) => {
+const initialState = [];
+const test =(state = initialState, action) => {
     return state;
 };
 export default test;
