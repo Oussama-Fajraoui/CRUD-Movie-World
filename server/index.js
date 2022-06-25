@@ -10,18 +10,25 @@ app.use(cors());
 let port = 5000;
 
 app.post('/api',(req,res)=> {
-    movie.saveRecipe(req.body);
+    movie.saveMovie(req.body);
     res.send('Test');
 })
 
+app.post('/api/d',(req,res)=>{
+    movie.deleteMovie(req.body.name).then(data=>{
+        res.send(data)
+    })
+})
+
+app.post('/api/search',(req,res)=>{
+    movie.searchMovie(req.body.name).then(data=>{
+        res.send(data)
+    })
+})
 app.get("/api",(req,res)=>{
-    let url ="https://api.themoviedb.org/3/search/company?api_key=<<api_key>>&page=1";
-    fetch(url).then(
-        async (response) =>{
-            let data = await response.json();
-            res.send(data.hits)
-        }
-    )
+    movie.getAllMovies().then(data=>{
+        res.send(data)
+    })
    })
 
 app.listen(port,()=>{

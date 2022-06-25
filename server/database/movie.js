@@ -18,7 +18,7 @@ let movieSchema = mongose.Schema({
 
 let Movie = mongose.model('Movie',movieSchema);
 
-let save = (data) => {
+let saveMovie = (data) => {
     let movie = new Movie ({
         id:data.id,
         image:data.image,
@@ -31,3 +31,21 @@ let save = (data) => {
     })
     return query
 }
+let getAllMovies = () =>{
+    return Movie.find({})
+}
+
+let searchMovie = (data)=>{
+    return Movie.find({name:data})
+}
+
+let deleteMovie = (data)=>{
+    Movie.deleteOne({name:data}).then(console.log('Movie deleted')).catch(err=>{
+        console.log("error")
+    })
+    return getAllMovies()
+}
+module.exports.saveMovie = saveMovie
+module.exports.getAllMovies = getAllMovies
+module.exports.deleteMovie = deleteMovie
+module.exports.searchMovie = searchMovie

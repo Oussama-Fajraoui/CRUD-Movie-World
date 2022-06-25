@@ -9,7 +9,6 @@ class Add extends React.Component{
             image:''
         }
        this.handleChange = this.handleChange.bind(this)
-       this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleChange(event) {
         this.setState({
@@ -17,27 +16,26 @@ class Add extends React.Component{
         })
     }
 
-    handleSubmit(event) {
-        console.log('A name was submitted: ' + this.state.value);
-        event.preventDefault();
-      }
     render(){
-        return(
+        return(<center>
         <div>
-            <h2>Add a movie</h2>
-            <form className="New-Movie-Form" onSubmit={this.handleSubmit}>
-                <label >Movie name:
-                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} /><br></br>
+            <center><h2 className="title">Add a movie</h2></center>
+            <div className="container">
+            <form className="New-Movie-Form" onSubmit={this.props.handleSubmit}>
+                <label className="text-form" >Movie name:
+                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required /><br></br>
                 </label><br></br>
-                <label >Movie
-                <textarea type="text" name='movie' value={this.state.movie} onChange={this.handleChange} /><br></br>
+                <label className="text-form">Movie
+                <textarea type="text" name='recipe' value={this.state.movie} onChange={this.handleChange} required /><br></br>
                 </label><br></br>
-                <label >image URL
-                <input type="text" name="image" value={this.state.image} onChange={this.handleChange} /><br></br>
+                <label  className="text-form">image URL
+                <input type="url" name="image" value={this.state.image} onChange={this.handleChange}  required/><br></br>
                 </label><br></br>
-                <input type="submit" className="btn-submit" value='Submit'/>
+                <input type="submit" className="btn-submit" value='Submit'/> 
+                <div className="success">{this.props.success}</div>
             </form>
-        </div>
+            </div>
+        </div></center>
         )
         
     }
