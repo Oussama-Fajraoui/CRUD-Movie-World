@@ -1,44 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import { ResultCard } from "./ResultCard";
 
-class Add extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            name:'',
-            movie:'',
-            image:''
+export const Add = () => {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const onChange = (e) => {
+    e.preventDefault();
+
+    setQuery(e.target.value);
+
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1&include_adult=false&query=${e.target.value}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.errors) {
+          setResults(data.results);
+        } else {
+          setResults([]);
         }
-       this.handleChange = this.handleChange.bind(this)
-    }
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
+      });
+  };
 
-    render(){
-        return(<center>
-        <div>
-            <center><h2 className="title">Add a movie</h2></center>
-            <div className="container">
-            <form className="New-Movie-Form" onSubmit={this.props.handleSubmit}>
-                <label className="text-form" >Movie name:
-                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required /><br></br>
-                </label><br></br>
-                <label className="text-form">Movie
-                <textarea type="text" name='recipe' value={this.state.movie} onChange={this.handleChange} required /><br></br>
-                </label><br></br>
-                <label  className="text-form">image URL
-                <input type="url" name="image" value={this.state.image} onChange={this.handleChange}  required/><br></br>
-                </label><br></br>
-                <input type="submit" className="btn-submit" value='Submit'/> 
-                <div className="success">{this.props.success}</div>
-            </form>
-            </div>
-        </div></center>
-        )
-        
-    }
-
-}
-export default Add
+  return (
+    <div className="add-page">
+      <div className="container">
+        <div className="add-content">
+          <div className="input-wrapper">
+            <input type="text" placeholder="Search for a movie" value={query} onChange={onChange} />
+          </div>
+             {results.length > 0 && ( <ul className="results" >
+              {results.map((movie) => (
+                <li key={movie.id}>
+                  <ResultCard movie={movie} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
